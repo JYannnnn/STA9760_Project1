@@ -87,6 +87,9 @@ urllib3==1.25.8
 elasticsearch==7.5.1
 ```
 
+#### Library: 
+- elasticsearch
+
 #### Scripts:
 - `main.py`
 ```
@@ -174,3 +177,38 @@ def get_nycdata(app_key,page_size,num_pages,push_elastic):
 
 	return results 
 ```
+
+#### Elastic Search:
+- Create Image from Base to Our Layer:
+```
+$ docker-compose build pyth
+```
+
+- Run ElasticSearch & Kibana:
+```
+$ docker-compose up -d
+```
+
+- Run Scripts:
+  - Push 100,000 data to ElasticSearch
+```
+docker-compose run -e APP_KEY={YourAppKey} -v ${pwd}:/app/out= pyth python -m main --page_size=100 --num_pages=1000 --output=./out/results.json --push_elastic=True
+```
+
+- Navigate to http://localhost:9200/
+<img width="453" alt="9200" src="https://user-images.githubusercontent.com/60801548/77241836-3da6d480-6bce-11ea-8350-438d126091b3.png">
+
+- Run curl request:
+  - Save output.txt File
+```
+curl -o output.txt http://localhost:9200/nycproject/_search?q=state:NY&size=10
+```
+  - View in Browser
+```
+http://localhost:9200/nycproject/_search?q=state:NY&size=2
+```
+  - Sample Output
+<img width="1319" alt="output" src="https://user-images.githubusercontent.com/60801548/77241881-17356900-6bcf-11ea-909b-9f8eca0ce7f9.png">
+
+
+ 
