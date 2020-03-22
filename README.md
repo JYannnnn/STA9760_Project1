@@ -1,10 +1,12 @@
 ## STA9760_Project1: Analyzing Millions of NYC Parking Violations
 
 #### Goal: Load and analyze a dataset containing millions of NYC parking violations since January 2016
-#### Dataset: https://dev.socrata.com/foundry/data.cityofnewyork.us/nc67-uf89
+#### Dataset (OPVC API): https://dev.socrata.com/foundry/data.cityofnewyork.us/nc67-uf89
  
 
 ### Part 1: Python Scripting
+#### Goal: 
+- Develop a python command line interface that can connect to the OPCV API and demonstrate that the data is accessible via python. The python script must be able to run within docker but take parameters from the command line. It should also support having the option to print results out to a file.
 
 #### Build Dockerfile:
 ```
@@ -37,20 +39,22 @@ urllib3==1.25.8
   - How many records to request from the API per call.
 - Num_Pages: 
   - Optional. 
-  - How many pages to request from the API per call. If not provided, will request data until the entirety of the content has been exhausted.
+  - How many times to request from the API. If not provided, will request data until the entirety of the content has been exhausted.
 - Output: 
   - Optional. 
   - Write data to a json file. In not provided, will print results to stdout.
 
 #### Command Line Arguments My Script Supports:
 ```
-$ docker run -e APP_KEY={YOUR_APP_KEY} -t bigdata1:1.0 python main.py --page_size=1000 --num_pages=4 --output=results.json
+$ docker run -v ${pwd}:/app -e APP_KEY=${Your_APP_Key} -it nycproject:1.0 python -m main --page_size=1000 --num_pages=4 --output=results.json
 ```
 
 #### Sample Output:
+- Goal: It is expected that stdout or results.json will contain the API response, which is simply rows and rows of data from the API within the confines of the parameters provided to the script.
 <img width="1311" alt="Sample Output" src="https://user-images.githubusercontent.com/60801548/77241266-f7e60e00-6bc5-11ea-87e6-fccb9fce8617.png">
 
 ### Part 2: Loading into ElasticSearch
+#### Goal: Leverage docker-compose to bring up a service that encapsulates nycproject container and an elasticsearch container and ensures that they are able to interact. The python script (from Part 1) now need not only download the data but also load it into the elasticsearch instance.
 
 #### Build docker-compose.yml:
 ```
@@ -203,8 +207,7 @@ docker-compose run -e APP_KEY={YourAppKey} -v ${pwd}:/app/out= pyth python -m ma
   - Output:
 <img width="453" alt="9200" src="https://user-images.githubusercontent.com/60801548/77241836-3da6d480-6bce-11ea-8350-438d126091b3.png">
 
-- Run curl request:
-  - Save output.txt File:
+- Run curl request and save output.txt File:
 ```
 curl -o output.txt http://localhost:9200/nycproject/_search?q=state:NY&size=10
 ```
@@ -217,6 +220,9 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 
 
 ### Part 3: Visualizing and Analysis on Kibana
+
+#### Goal: Stand up an instance of Kibana on top of the ElasticSearch instance in order to visualize and analyze dataset. Create visualizations in Kibana that analyze the data loaded and presents analysis in graphical form. 
+
 - Navigate to http://localhost:5601/
 
 - Load Past 5 Years Data:
