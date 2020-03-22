@@ -2,7 +2,7 @@
 
 ### Part 1: Python Scripting
 
-#### Build Dockerfile
+#### Build Dockerfile:
 ```
 FROM python:3.7 
 
@@ -48,7 +48,7 @@ $ docker run -e APP_KEY={YOUR_APP_KEY} -t bigdata1:1.0 python main.py --page_siz
 
 ### Part 2: Loading into ElasticSearch
 
-#### Build docker-compose.yml
+#### Build docker-compose.yml:
 ```
 version: '3'
 services:
@@ -179,7 +179,7 @@ def get_nycdata(app_key,page_size,num_pages,push_elastic):
 ```
 
 #### Elastic Search:
-- Create Image 
+- Create Image:
 ```
 $ docker-compose build pyth
 ```
@@ -196,14 +196,15 @@ docker-compose run -e APP_KEY={YourAppKey} -v ${pwd}:/app/out= pyth python -m ma
 ```
 
 - Navigate to http://localhost:9200/
+  - Output:
 <img width="453" alt="9200" src="https://user-images.githubusercontent.com/60801548/77241836-3da6d480-6bce-11ea-8350-438d126091b3.png">
 
 - Run curl request:
-  - Save output.txt File
+  - Save output.txt File:
 ```
 curl -o output.txt http://localhost:9200/nycproject/_search?q=state:NY&size=10
 ```
-  - View in Browser
+  - View in Browser:
 ```
 http://localhost:9200/nycproject/_search?q=state:NY&size=2
 ```
@@ -212,13 +213,15 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 
 
 ### Part 3: Visualizing and Analysis on Kibana
-- Navigate to http://localhost:5601/
+- Navigate to http://localhost:5601/:
 
-- Load Past 5 Years Data
+- Load Past 5 Years Data:
 <img width="1316" alt="5 years" src="https://user-images.githubusercontent.com/60801548/77241947-d722b600-6bcf-11ea-88c4-e66819d36866.png">
 
 #### Visualize Dataset
-- 1. Vertical Bar Chart - Which county had the highest average reduction amount?
+- Vertical Bar Chart - Which county had the highest average reduction amount?
 
 <img width="1442" alt="Vertical Bar Chart" src="https://user-images.githubusercontent.com/60801548/77241984-28cb4080-6bd0-11ea-8e9f-d996238758f0.png">
 
+- Horizontal Bar Chart - Which violation was most popular? Second most popular? 
+<img width="1442" alt="Horizontal Bar Chart" src="https://user-images.githubusercontent.com/60801548/77242018-81024280-6bd0-11ea-9f41-df4eef1a873d.png">
