@@ -15,3 +15,6 @@
 - Num_Pages: Optional. How many pages to request from the API per call. If not provided, will request data until the entirety of the content has been exhausted.
 - Output: Optional. Write data to a json file. In not provided, will print results to stdout.
 
+#### Sample Output:
+
+
