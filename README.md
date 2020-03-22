@@ -27,13 +27,16 @@ urllib3==1.25.8
 
 #### Key Arguments:
 - App_Key: 
--- Make sure that user can pass along an App_Key for the API in a safe manner
+  - Make sure that user can pass along an App_Key for the API in a safe manner
 - Page_Size: 
--- Required. How many records to request from the API per call.
+  - Required. 
+  - How many records to request from the API per call.
 - Num_Pages: 
--- Optional. How many pages to request from the API per call. If not provided, will request data until the entirety of the content has been exhausted.
+  - Optional. 
+  - How many pages to request from the API per call. If not provided, will request data until the entirety of the content has been exhausted.
 - Output: 
--- Optional. Write data to a json file. In not provided, will print results to stdout.
+  - Optional. 
+  - Write data to a json file. In not provided, will print results to stdout.
 
 #### Command Line Arguments my script support:
 ```
@@ -45,7 +48,7 @@ $ docker run -e APP_KEY={YOUR_APP_KEY} -t bigdata1:1.0 python main.py --page_siz
 
 ### Part 2: Loading into ElasticSearch
 
-#### Build Docker-Compose File
+#### Build docker-compose.yml
 ```
 version: '3'
 services:
@@ -84,4 +87,90 @@ urllib3==1.25.8
 elasticsearch==7.5.1
 ```
 
-#### 
+#### Scripts:
+- `main.py`
+```
+import os
+import argparse
+
+from src.nycproject.api import get_nycdata
+
+#if directly call, run the below codes
+if __name__ == "__main__":
+	app_key = os.getenv(f'APP_KEY')
+
+	parser = argparse.ArgumentParser()
+	parser.add_argument("--page_size", type=int)
+	parser.add_argument("--num_pages", default=None, type=int)
+	parser.add_argument("--output", default=None)
+	parser.add_argument("--push_elastic", default=False, type=bool)
+	args = parser.parse_args()
+
+	#define nycdata using get_nycdata function
+	nycdata = get_nycdata(app_key,args.page_size,args.num_pages,args.push_elastic)
+
+	#write output file
+	with open(args.output,"w") as outfile:
+		for lines in nycdata:
+			for line in lines:
+				outfile.write(f"{line}"+'\n')
+```
+
+- `elasticsearch.py`
+```
+from datetime import datetime, date
+from elasticsearch import Elasticsearch
+
+#Create index
+def create_and_update_index(index_name):
+    #Connect to localhost by default
+    es = Elasticsearch()
+    try:
+        es.indices.create(index=index_name)
+    except:
+        pass
+    return es
+
+#Change data formatting for amount and date
+def formatting(data):
+    for key, value in data.items():
+        if 'amount' in key:
+            data[key] = float(value)
+        elif 'date' in key:
+            try:
+                data[key] = datetime.strptime(data[key], '%m/%d/%Y').date()
+            except:
+                pass
+                  
+#Push data to Elastic Search
+#Use 'summons_number' as unique id
+def push_data(data, es, index):
+    formatting(data)
+    res = es.index(index=index, body=data, id=data['summons_number'])
+```
+
+- `api.py`
+```
+from sodapy import Socrata
+from src.nycproject.elasticsearch import create_and_update_index, push_data
+
+def get_nycdata(app_key,page_size,num_pages,push_elastic):
+	results = []
+	client = Socrata("data.cityofnewyork.us",app_key)
+	count_rows = int(client.get('nc67-uf89', select='COUNT(*)')[0]['COUNT'])
+
+	if not num_pages:
+		num_pages = count_rows//page_size+1
+
+	if push_elastic:
+		es = create_and_update_index('nycproject')
+
+	for i in range(0,num_pages):
+		data_collect = client.get('nc67-uf89',limit=page_size,offset=i*(page_size))
+		results.append(data_collect)
+		for data in data_collect:
+			if push_elastic:
+				push_data(data,es,'nycproject')
+
+	return results 
+```
