@@ -213,7 +213,7 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 
 
 ### Part 3: Visualizing and Analysis on Kibana
-- Navigate to http://localhost:5601/:
+- Navigate to http://localhost:5601/
 
 - Load Past 5 Years Data:
 <img width="1316" alt="5 years" src="https://user-images.githubusercontent.com/60801548/77241947-d722b600-6bcf-11ea-88c4-e66819d36866.png">
@@ -225,3 +225,15 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 
 - Horizontal Bar Chart - Which violation was most popular? Second most popular? 
 <img width="1442" alt="Horizontal Bar Chart" src="https://user-images.githubusercontent.com/60801548/77242018-81024280-6bd0-11ea-9f41-df4eef1a873d.png">
+
+- Pie Chart - What are the top 5 violation type? Pencentages?
+<img width="1439" alt="Pie Chart" src="https://user-images.githubusercontent.com/60801548/77242062-f0783200-6bd0-11ea-85dd-fa7dccd3af8e.png">
+
+- Line Chart - What are the monthly changes of Fine Amount, Interest Amount, and Penalty Amount?
+<img width="1437" alt="Line Chart" src="https://user-images.githubusercontent.com/60801548/77242082-24535780-6bd1-11ea-8493-27cc190ef4cb.png">
+
+- Metric - How many cases occred for the top 10 types of violations?
+<img width="1443" alt="Metric" src="https://user-images.githubusercontent.com/60801548/77242096-4d73e800-6bd1-11ea-9dc8-4d4bfc0d1471.png">
+
+- Dashboard
+<img width="1437" alt="Dashboard" src="https://user-images.githubusercontent.com/60801548/77242101-595faa00-6bd1-11ea-9bb3-56a4b72f5aed.png">
