@@ -193,7 +193,7 @@ def get_nycdata(app_key,page_size,num_pages,push_elastic):
 $ docker-compose build pyth
 ```
 
-- Run ElasticSearch & Kibana:
+- Launch ElasticSearch & Kibana:
 ```
 $ docker-compose up -d
 ```
