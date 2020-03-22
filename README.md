@@ -1,5 +1,9 @@
 ## STA9760_Project1: Analyzing Millions of NYC Parking Violations
 
+#### Goal: Load and analyze a dataset containing millions of NYC parking violations since January 2016
+#### Dataset: https://dev.socrata.com/foundry/data.cityofnewyork.us/nc67-uf89
+ 
+
 ### Part 1: Python Scripting
 
 #### Build Dockerfile:
@@ -235,5 +239,5 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 - Metric - How many cases occred for the top 10 types of violations?
 <img width="1443" alt="Metric" src="https://user-images.githubusercontent.com/60801548/77242096-4d73e800-6bd1-11ea-9dc8-4d4bfc0d1471.png">
 
-- Dashboard
+- Create a Dashboard
 <img width="1437" alt="Dashboard" src="https://user-images.githubusercontent.com/60801548/77242101-595faa00-6bd1-11ea-9bb3-56a4b72f5aed.png">
