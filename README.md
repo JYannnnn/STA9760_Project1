@@ -38,7 +38,7 @@ urllib3==1.25.8
   - Optional. 
   - Write data to a json file. In not provided, will print results to stdout.
 
-#### Command Line Arguments my script support:
+#### Command Line Arguments My Script Supports:
 ```
 $ docker run -e APP_KEY={YOUR_APP_KEY} -t bigdata1:1.0 python main.py --page_size=1000 --num_pages=4 --output=results.json
 ```
@@ -179,7 +179,7 @@ def get_nycdata(app_key,page_size,num_pages,push_elastic):
 ```
 
 #### Elastic Search:
-- Create Image from Base to Our Layer:
+- Create Image 
 ```
 $ docker-compose build pyth
 ```
@@ -211,4 +211,14 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 <img width="1319" alt="output" src="https://user-images.githubusercontent.com/60801548/77241881-17356900-6bcf-11ea-909b-9f8eca0ce7f9.png">
 
 
- 
+### Part 3: Visualizing and Analysis on Kibana
+- Navigate to http://localhost:5601/
+
+- Load Past 5 Years Data
+<img width="1316" alt="5 years" src="https://user-images.githubusercontent.com/60801548/77241947-d722b600-6bcf-11ea-88c4-e66819d36866.png">
+
+#### Visualize Dataset
+- 1. Vertical Bar Chart - Which county had the highest average reduction amount?
+
+<img width="1442" alt="Vertical Bar Chart" src="https://user-images.githubusercontent.com/60801548/77241984-28cb4080-6bd0-11ea-8e9f-d996238758f0.png">
+
