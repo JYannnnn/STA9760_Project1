@@ -54,7 +54,8 @@ $ docker run -v ${pwd}:/app -e APP_KEY=${Your_APP_Key} -it nycproject:1.0 python
 <img width="1311" alt="Sample Output" src="https://user-images.githubusercontent.com/60801548/77241266-f7e60e00-6bc5-11ea-87e6-fccb9fce8617.png">
 
 ### Part 2: Loading into ElasticSearch
-#### Goal: Leverage docker-compose to bring up a service that encapsulates nycproject container and an elasticsearch container and ensures that they are able to interact. The python script (from Part 1) now need not only download the data but also load it into the elasticsearch instance.
+#### Goal: 
+- Leverage docker-compose to bring up a service that encapsulates nycproject container and an elasticsearch container and ensures that they are able to interact. The python script (from Part 1) now need not only download the data but also load it into the elasticsearch instance.
 
 #### Build docker-compose.yml:
 ```
@@ -221,7 +222,8 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 
 ### Part 3: Visualizing and Analysis on Kibana
 
-#### Goal: Stand up an instance of Kibana on top of the ElasticSearch instance in order to visualize and analyze dataset. Create visualizations in Kibana that analyze the data loaded and presents analysis in graphical form. 
+#### Goal: 
+- Stand up an instance of Kibana on top of the ElasticSearch instance in order to visualize and analyze dataset. Create visualizations in Kibana that analyze the data loaded and presents analysis in graphical form. 
 
 - Navigate to http://localhost:5601/
 
