@@ -230,7 +230,7 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 - Load Past 5 Years Data:
 <img width="1316" alt="5 years" src="https://user-images.githubusercontent.com/60801548/77241947-d722b600-6bcf-11ea-88c4-e66819d36866.png">
 
-#### Visualize Dataset
+#### Visualize Dataset：
 - Vertical Bar Chart - Which county had the highest average reduction amount?
 
 <img width="1442" alt="Vertical Bar Chart" src="https://user-images.githubusercontent.com/60801548/77241984-28cb4080-6bd0-11ea-8e9f-d996238758f0.png">
@@ -244,7 +244,7 @@ http://localhost:9200/nycproject/_search?q=state:NY&size=2
 - Line Chart - What are the monthly changes of Fine Amount, Interest Amount, and Penalty Amount?
 <img width="1437" alt="Line Chart" src="https://user-images.githubusercontent.com/60801548/77242082-24535780-6bd1-11ea-8493-27cc190ef4cb.png">
 
-- Metric - How many cases occred for the top 10 types of violations?
+- Metric - How many cases occured for the top 10 types of violations?
 <img width="1443" alt="Metric" src="https://user-images.githubusercontent.com/60801548/77242096-4d73e800-6bd1-11ea-9dc8-4d4bfc0d1471.png">
 
 - Create a Dashboard
